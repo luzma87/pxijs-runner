@@ -34,7 +34,9 @@ Main.prototype.loadSpriteSheet = function () {
     loader.add([
         Sky.TEXTURE_PATH,
         Mountains.TEXTURE_PATH,
-        "resources/world/tiles.json"
+        Ground.TEXTURE_PATH,
+        Fence.TEXTURE_PATH,
+        Tile.TEXTURE_PATH
     ]);
     loader.once("complete", this.spriteSheetLoaded.bind(this));
     loader.load();

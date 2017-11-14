@@ -43,6 +43,11 @@ Tiles.prototype.checkViewportXBounds = function (viewportX) {
 
 Tiles.prototype.removeOldTiles = function (prevViewPortTileX) {
     let numOldTiles = this.viewportTileX - prevViewPortTileX;
+    // console.group();
+    // console.log("this viewPortTileX", this.viewportTileX);
+    // console.log("prevViewPortTileX", prevViewPortTileX);
+    // console.log("numOldTiles", numOldTiles);
+    // console.groupEnd();
     if (numOldTiles > Tiles.VIEWPORT_NUM_TILES) {
         numOldTiles = Tiles.VIEWPORT_NUM_TILES;
     }
@@ -57,25 +62,28 @@ Tiles.prototype.removeOldTiles = function (prevViewPortTileX) {
 };
 
 Tiles.prototype.addNewTiles = function () {
-    console.log("aqui");
     let firstX = -(this.viewportX % Tile.WIDTH);
     let tileIndex = 0;
     for (let i = 0; i < this.viewportTileX + Tiles.VIEWPORT_NUM_TILES; i++) {
         let tile = this.tiles[i];
-        console.log(tile);
-        console.log(tile.sprite);
-        if (tile.sprite !== null) {
+        if (tile.type !== TileType.GAP && (tile.sprite === null || tile.sprite === undefined)) {
             tile.sprite = this.borrowTileSprite(tile.type);
 
-            // tile.sprite.position.x = firstX + (tileIndex + Tile.WIDTH);
-            // tile.sprite.position.y = tile.y;
+            // console.group();
+            // console.log(this.pool);
+            // console.log(tile);
+            // console.log(tile.sprite);
+            // console.groupEnd();
 
-            console.log("-->");
+            tile.sprite.position.x = firstX + (tileIndex + Tile.WIDTH);
+            tile.sprite.position.y = tile.y;
 
-            tile.sprite.position.x = 100;
-            tile.sprite.position.y = 100;
+            tile.sprite.height = getProportionalHeight(Tile.WIDTH, tile.sprite.width, tile.sprite.height);
+            tile.sprite.width = Tile.WIDTH;
 
             this.addChild(tile.sprite);
+        } else if (tile.sprite !== null) {
+            tile.sprite.position.x = firstX + (tileIndex * Tile.WIDTH);
         }
 
         tileIndex += 1;
@@ -83,11 +91,15 @@ Tiles.prototype.addNewTiles = function () {
 };
 
 Tiles.prototype.createLookupTables = function () {
-    this.borrowTileSprite = [];
-    this.borrowTileSprite[TileType.FULL_FLOOR] = this.pool.borrowFullFloor;
+    this.borrowTileSpriteLookup = [];
+    this.borrowTileSpriteLookup[TileType.FULL_FLOOR] = this.pool.borrowFullFloor;
+    this.borrowTileSpriteLookup[TileType.FULL_FLOOR_FRONT_EDGE] = this.pool.borrowFullFloorFrontEdge;
+    this.borrowTileSpriteLookup[TileType.FULL_FLOOR_BACK_EDGE] = this.pool.borrowFullFloorBackEdge;
 
-    this.returnTileSprite = [];
-    this.returnTileSprite[TileType.FULL_FLOOR] = this.pool.returnFullFloor;
+    this.returnTileSpriteLookup = [];
+    this.returnTileSpriteLookup[TileType.FULL_FLOOR] = this.pool.returnFullFloor;
+    this.returnTileSpriteLookup[TileType.FULL_FLOOR_FRONT_EDGE] = this.pool.returnFullFloorFrontEdge;
+    this.returnTileSpriteLookup[TileType.FULL_FLOOR_BACK_EDGE] = this.pool.returnFullFloorBackEdge;
 };
 
 Tiles.prototype.borrowTileSprite = function (tileType) {
