@@ -1,8 +1,8 @@
-Mountain.DELTA_X = 0.032;
-Mountain.TEXTURE_PATH = "resources/bg/layer-2-mountain.png";
+Mountains.DELTA_X = Sky.DELTA_X * 2;
+Mountains.TEXTURE_PATH = "resources/bg/mountains.png";
 
-function Mountain() {
-    let texture = PIXI.Texture.fromImage(Mountain.TEXTURE_PATH);
+function Mountains() {
+    let texture = PIXI.Texture.fromImage(Mountains.TEXTURE_PATH);
 
     let sprite = PIXI.extras.TilingSprite.call(this, texture, Main.WIDTH, Main.HEIGHT);
     sprite.tileScale.x = 0.35;
@@ -16,10 +16,10 @@ function Mountain() {
     this.viewportX = 0;
 }
 
-Mountain.prototype = Object.create(PIXI.extras.TilingSprite.prototype);
+Mountains.prototype = Object.create(PIXI.extras.TilingSprite.prototype);
 
-Mountain.prototype.setViewportX = function (newViewportX) {
+Mountains.prototype.setViewportX = function (newViewportX) {
     let distanceTravelled = newViewportX - this.viewportX;
     this.viewportX = newViewportX;
-    this.tilePosition.x -= (distanceTravelled * Mountain.DELTA_X);
+    this.tilePosition.x -= (distanceTravelled * Mountains.DELTA_X);
 };
