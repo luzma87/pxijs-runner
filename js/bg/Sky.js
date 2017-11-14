@@ -1,8 +1,8 @@
-Far.DELTA_X = 0.064;
-Far.TEXTURE_PATH = "resources/bg/layer-1-sky.png";
+Sky.DELTA_X = 0.064;
+Sky.TEXTURE_PATH = "resources/bg/layer-1-sky.png";
 
-function Far() {
-    let texture = PIXI.Texture.fromImage(Far.TEXTURE_PATH);
+function Sky() {
+    let texture = PIXI.Texture.fromImage(Sky.TEXTURE_PATH);
 
     let sprite = PIXI.extras.TilingSprite.call(this, texture, Main.WIDTH, Main.HEIGHT);
     sprite.tileScale.x = 0.35;
@@ -16,10 +16,10 @@ function Far() {
     this.viewportX = 0;
 }
 
-Far.prototype = Object.create(PIXI.extras.TilingSprite.prototype);
+Sky.prototype = Object.create(PIXI.extras.TilingSprite.prototype);
 
-Far.prototype.setViewportX = function (newViewportX) {
+Sky.prototype.setViewportX = function (newViewportX) {
     let distanceTravelled = newViewportX - this.viewportX;
     this.viewportX = newViewportX;
-    this.tilePosition.x -= (distanceTravelled * Far.DELTA_X);
+    this.tilePosition.x -= (distanceTravelled * Sky.DELTA_X);
 };

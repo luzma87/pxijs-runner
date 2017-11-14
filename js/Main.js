@@ -32,8 +32,8 @@ Main.prototype.update = function () {
 Main.prototype.loadSpriteSheet = function () {
     let loader = PIXI.loader;
     loader.add([
-        Far.TEXTURE_PATH,
-        Mid.TEXTURE_PATH
+        Sky.TEXTURE_PATH,
+        Mountain.TEXTURE_PATH
     ]);
     loader.once("complete", this.spriteSheetLoaded.bind(this));
     loader.load();
