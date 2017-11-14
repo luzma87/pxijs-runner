@@ -33,7 +33,8 @@ Main.prototype.loadSpriteSheet = function () {
     let loader = PIXI.loader;
     loader.add([
         Sky.TEXTURE_PATH,
-        Mountains.TEXTURE_PATH
+        Mountains.TEXTURE_PATH,
+        "resources/world/tiles.json"
     ]);
     loader.once("complete", this.spriteSheetLoaded.bind(this));
     loader.load();
