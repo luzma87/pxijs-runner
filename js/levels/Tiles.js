@@ -43,11 +43,6 @@ Tiles.prototype.checkViewportXBounds = function (viewportX) {
 
 Tiles.prototype.removeOldTiles = function (prevViewPortTileX) {
     let numOldTiles = this.viewportTileX - prevViewPortTileX;
-    // console.group();
-    // console.log("this viewPortTileX", this.viewportTileX);
-    // console.log("prevViewPortTileX", prevViewPortTileX);
-    // console.log("numOldTiles", numOldTiles);
-    // console.groupEnd();
     if (numOldTiles > Tiles.VIEWPORT_NUM_TILES) {
         numOldTiles = Tiles.VIEWPORT_NUM_TILES;
     }
@@ -64,16 +59,10 @@ Tiles.prototype.removeOldTiles = function (prevViewPortTileX) {
 Tiles.prototype.addNewTiles = function () {
     let firstX = -(this.viewportX % Tile.WIDTH);
     let tileIndex = 0;
-    for (let i = 0; i < this.viewportTileX + Tiles.VIEWPORT_NUM_TILES; i++) {
+    for (let i = this.viewportTileX; i < this.viewportTileX + Tiles.VIEWPORT_NUM_TILES; i++) {
         let tile = this.tiles[i];
         if (tile.type !== TileType.GAP && (tile.sprite === null || tile.sprite === undefined)) {
             tile.sprite = this.borrowTileSprite(tile.type);
-
-            // console.group();
-            // console.log(this.pool);
-            // console.log(tile);
-            // console.log(tile.sprite);
-            // console.groupEnd();
 
             tile.sprite.position.x = firstX + (tileIndex + Tile.WIDTH);
             tile.sprite.position.y = tile.y;
@@ -85,7 +74,6 @@ Tiles.prototype.addNewTiles = function () {
         } else if (tile.sprite !== null) {
             tile.sprite.position.x = firstX + (tileIndex * Tile.WIDTH);
         }
-
         tileIndex += 1;
     }
 };

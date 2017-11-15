@@ -4,21 +4,17 @@ function Level1(tiles) {
 }
 
 Level1.prototype.createMap = function () {
+    const spanCount = 100;
 
-    this.tiles.addTile(TileType.FULL_FLOOR, 100);
-    this.tiles.addTile(TileType.GAP);
-    this.tiles.addTile(TileType.FULL_FLOOR, 100);
+    const y = Main.HEIGHT - Tile.WIDTH;
+    for (let i = 0; i < spanCount; i++) {
+        const length = getRandomInt(3, 10);
+        // const gapLength = getRandomInt(1);
+        const gapLength = 1;
 
-    // let spanCount = 100;
-    //
-    // let y = 100;
-    // for (let i = 0; i < spanCount; i++) {
-    //     const length = getRandomInt(3, 10);
-    //     const gapLength = getRandomInt(1, 3);
-    //
-    //     this.createSpan(length, y);
-    //     this.createGap(gapLength);
-    // }
+        this.createSpan(length, y);
+        this.createGap(gapLength);
+    }
 };
 
 Level1.prototype.createSpan = function (spanLength, y) {
