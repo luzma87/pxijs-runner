@@ -5,8 +5,8 @@ function Level1(tiles) {
 
 Level1.prototype.createMap = function () {
     const spanCount = 100;
+    const y = Main.HEIGHT - Tile.HEIGHT;
 
-    const y = Main.HEIGHT - Tile.WIDTH;
     for (let i = 0; i < spanCount; i++) {
         const length = getRandomInt(3, 10);
         // const gapLength = getRandomInt(1);

@@ -5,11 +5,11 @@ function Scroller(stage) {
     this.mountains = new Mountains();
     stage.addChild(this.mountains);
 
-    this.ground = new Ground();
-    stage.addChild(this.ground);
-
-    this.fence = new Fence();
-    stage.addChild(this.fence);
+    // this.ground = new Water();
+    // stage.addChild(this.ground);
+    //
+    // this.fence = new Fence();
+    // stage.addChild(this.fence);
 
     this.tiles = new Tiles();
     stage.addChild(this.tiles);
@@ -23,8 +23,8 @@ Scroller.prototype.setViewportX = function (viewportX) {
     this.viewportX = viewportX;
     this.sky.setViewportX(viewportX);
     this.mountains.setViewportX(viewportX);
-    this.ground.setViewportX(viewportX);
-    this.fence.setViewportX(viewportX);
+    // this.ground.setViewportX(viewportX);
+    // this.fence.setViewportX(viewportX);
 
     this.tiles.setViewportX(viewportX);
 };

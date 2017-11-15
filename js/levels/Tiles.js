@@ -61,6 +61,7 @@ Tiles.prototype.addNewTiles = function () {
     let tileIndex = 0;
     for (let i = this.viewportTileX; i < this.viewportTileX + Tiles.VIEWPORT_NUM_TILES; i++) {
         let tile = this.tiles[i];
+
         if (tile.type !== TileType.GAP && (tile.sprite === null || tile.sprite === undefined)) {
             tile.sprite = this.borrowTileSprite(tile.type);
 

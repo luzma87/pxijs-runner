@@ -1,4 +1,4 @@
-Sky.DELTA_X = 0.016;
+Sky.DELTA_X = 0.032;
 Sky.TEXTURE_PATH = "resources/bg/sky.png";
 
 function Sky() {
